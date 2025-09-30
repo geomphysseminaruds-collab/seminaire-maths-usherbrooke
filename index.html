@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Student Seminar - Mathematics UdeS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00703c 0%, #008d4c 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .logo-section img {
+            height: 60px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .title-section h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .title-section p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: white;
+            color: #00703c;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #00703c;
+        }
+
+        .dept-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .dept-link a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            font-size: 0.95rem;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 2px;
+        }
+
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background: #00703c;
+            color: white;
+        }
+
+        section {
+            padding: 3rem 0;
+        }
+
+        h2 {
+            color: #00703c;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #008d4c;
+        }
+
+        .intro {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .seminar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .seminar-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .seminar-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .seminar-date {
+            display: inline-block;
+            background: #00703c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .seminar-title {
+            font-size: 1.3rem;
+            color: #00703c;
+            margin-bottom: 0.5rem;
+        }
+
+        .seminar-speaker {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .seminar-abstract {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .domains {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .domain-tag {
+            background: linear-gradient(135deg, #00703c 0%, #008d4c 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0, 112, 60, 0.3);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #00703c 0%, #008d4c 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .cta-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #00703c;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #00703c;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            background: #00703c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #00703c;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box h3 {
+            color: #00703c;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box a {
+            color: #008d4c;
+            text-decoration: none;
+            border-bottom: 1px solid #008d4c;
+        }
+
+        .info-box a:hover {
+            color: #00703c;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .title-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .seminar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="https://www.usherbrooke.ca/documents/11143/6293498/UdeS_logo_h_rgbweb.png" 
+                         alt="Université de Sherbrooke">
+                    <div class="title-section">
+                        <h1 class="lang-content lang-fr active">Séminaire des Étudiants Diplômés en Mathématiques</h1>
+                        <h1 class="lang-content lang-en">Graduate Student Seminar in Mathematics</h1>
+                        <p class="lang-content lang-fr active">Université de Sherbrooke</p>
+                        <p class="lang-content lang-en">Université de Sherbrooke</p>
+                    </div>
+                </div>
+                <div class="language-switcher">
+                    <button class="lang-btn active" onclick="switchLanguage('fr')" data-lang="fr">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">EN</button>
+                </div>
+            </div>
+            <div class="dept-link">
+                <a href="https://www.usherbrooke.ca/mathematiques/" target="_blank" class="lang-content lang-fr active">
+                    🔗 Département de mathématiques
+                </a>
+                <a href="https://www.usherbrooke.ca/mathematiques/" target="_blank" class="lang-content lang-en">
+                    🔗 Department of Mathematics
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation FR -->
+    <nav class="lang-content lang-fr active">
+        <ul>
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#prochains">Prochains Séminaires</a></li>
+            <li><a href="#archives">Archives</a></li>
+            <li><a href="#domaines">Domaines</a></li>
+            <li><a href="#proposer">Proposer un Talk</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Navigation EN -->
+    <nav class="lang-content lang-en">
+        <ul>
+            <li><a href="#accueil">Home</a></li>
+            <li><a href="#prochains">Upcoming Seminars</a></li>
+            <li><a href="#archives">Archives</a></li>
+            <li><a href="#domaines">Areas</a></li>
+            <li><a href="#proposer">Propose a Talk</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENU FRANÇAIS -->
+    <div class="lang-content lang-fr active">
+        <section id="accueil">
+            <div class="container">
+                <div class="intro">
+                    <h2>Bienvenue</h2>
+                    <p>
+                        Le séminaire des étudiants diplômés en mathématiques de l'Université de Sherbrooke est un forum académique 
+                        où les doctorants et étudiants à la maîtrise présentent leurs travaux de recherche. Nous couvrons 
+                        l'ensemble des domaines mathématiques : géométrie, algèbre, analyse, topologie, mathématiques appliquées et plus encore.
+                    </p>
+                </div>
+
+                <div class="cta-section">
+                    <h3>Vous souhaitez présenter vos travaux de recherche ?</h3>
+                    <p>Partagez vos découvertes avec la communauté des étudiants diplômés en mathématiques</p>
+                    <a href="#proposer" class="btn">Proposer une présentation</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="prochains">
+            <div class="container">
+                <h2>Prochains Séminaires</h2>
+                
+                <div class="seminar-grid">
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 15 Octobre 2025, 14h00</span>
+                        <h3 class="seminar-title">Géométrie différentielle des variétés riemanniennes</h3>
+                        <p class="seminar-speaker">Marie Dubois, Doctorat 2ème année</p>
+                        <p class="seminar-abstract">
+                            Une introduction aux concepts fondamentaux de la géométrie différentielle, 
+                            avec un focus sur les applications en physique théorique et en relativité générale.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 22 Octobre 2025, 14h00</span>
+                        <h3 class="seminar-title">Théorie des représentations de groupes finis</h3>
+                        <p class="seminar-speaker">Thomas Bernard, Doctorat 3ème année</p>
+                        <p class="seminar-abstract">
+                            Exploration des représentations de groupes finis et leurs applications 
+                            en théorie des nombres et en cryptographie moderne.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 5 Novembre 2025, 14h00</span>
+                        <h3 class="seminar-title">Méthodes variationnelles en analyse fonctionnelle</h3>
+                        <p class="seminar-speaker">Sophie Martin, Maîtrise 2ème année</p>
+                        <p class="seminar-abstract">
+                            Discussion sur les méthodes variationnelles et leurs applications 
+                            aux équations aux dérivées partielles non-linéaires.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>📍 Informations pratiques</h3>
+                    <p><strong>Lieu :</strong> Salle à confirmer, Département de mathématiques</p>
+                    <p><strong>Format :</strong> Hybride (présentiel + Zoom)</p>
+                    <p><strong>Durée :</strong> 50 minutes (présentation + questions)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="archives" style="background: white;">
+            <div class="container">
+                <h2>Archives des Séminaires</h2>
+                
+                <div class="seminar-grid">
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 20 Septembre 2025</span>
+                        <h3 class="seminar-title">Topologie algébrique et théorie de l'homologie</h3>
+                        <p class="seminar-speaker">Jean Lefèvre</p>
+                        <p class="seminar-abstract">
+                            Présentation des invariants homologiques et leurs applications 
+                            en topologie algébrique moderne.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 13 Septembre 2025</span>
+                        <h3 class="seminar-title">Courbes elliptiques et cryptographie</h3>
+                        <p class="seminar-speaker">Alice Moreau</p>
+                        <p class="seminar-abstract">
+                            Étude des courbes elliptiques sur les corps finis et leurs applications 
+                            aux protocoles cryptographiques contemporains.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="domaines">
+            <div class="container">
+                <h2>Domaines de Recherche</h2>
+                <div class="domains">
+                    <span class="domain-tag">📐 Géométrie</span>
+                    <span class="domain-tag">🔢 Algèbre</span>
+                    <span class="domain-tag">📊 Analyse</span>
+                    <span class="domain-tag">🌀 Topologie</span>
+                    <span class="domain-tag">🔣 Théorie des Nombres</span>
+                    <span class="domain-tag">💻 Mathématiques Appliquées</span>
+                    <span class="domain-tag">📈 Probabilités & Statistiques</span>
+                    <span class="domain-tag">⚡ Équations Différentielles</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposer" style="background: white;">
+            <div class="container">
+                <h2>Proposer une Présentation</h2>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Courriel *</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="programme">Programme *</label>
+                            <select id="programme" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="m1">Maîtrise - 1ère année</option>
+                                <option value="m2">Maîtrise - 2ème année</option>
+                                <option value="d1">Doctorat - 1ère année</option>
+                                <option value="d2">Doctorat - 2ème année</option>
+                                <option value="d3">Doctorat - 3ème année</option>
+                                <option value="d4">Doctorat - 4ème année+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="domaine">Domaine de recherche *</label>
+                            <input type="text" id="domaine" placeholder="Ex: Géométrie algébrique" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titre">Titre de la présentation *</label>
+                            <input type="text" id="titre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resume">Résumé (200-300 mots) *</label>
+                            <textarea id="resume" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date-pref">Disponibilités</label>
+                            <input type="text" id="date-pref" placeholder="Ex: Novembre ou Décembre 2025">
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; color: #00703c;">Soumettre la proposition</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact & Informations</h2>
+                <div class="contact-form">
+                    <div class="info-box">
+                        <h3>Organisateurs</h3>
+                        <p><strong>Courriel :</strong> seminaire.doctorants.math@usherbrooke.ca</p>
+                        <p><strong>Département :</strong> <a href="https://www.usherbrooke.ca/mathematiques/" target="_blank">Département de mathématiques - UdeS</a></p>
+                        <p><strong>Liste de diffusion :</strong> <a href="#">S'abonner aux annonces</a></p>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem; color: #00703c;">Nous contacter</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="contact-nom">Nom</label>
+                            <input type="text" id="contact-nom">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email">Courriel</label>
+                            <input type="email" id="contact-email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; color: #00703c;">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Séminaire des Étudiants Diplômés en Mathématiques - Université de Sherbrooke</p>
+                <p style="margin-top: 0.5rem; opacity: 0.8;">Un forum académique organisé par et pour les étudiants diplômés</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- CONTENU ANGLAIS -->
+    <div class="lang-content lang-en">
+        <section id="accueil">
+            <div class="container">
+                <div class="intro">
+                    <h2>Welcome</h2>
+                    <p>
+                        The Graduate Student Seminar in Mathematics at Université de Sherbrooke is an academic forum 
+                        where doctoral and master's students present their research work. We cover all areas of mathematics: 
+                        geometry, algebra, analysis, topology, applied mathematics, and more.
+                    </p>
+                </div>
+
+                <div class="cta-section">
+                    <h3>Would you like to present your research?</h3>
+                    <p>Share your findings with the graduate mathematics community</p>
+                    <a href="#proposer" class="btn">Propose a Presentation</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="prochains">
+            <div class="container">
+                <h2>Upcoming Seminars</h2>
+                
+                <div class="seminar-grid">
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 October 15, 2025, 2:00 PM</span>
+                        <h3 class="seminar-title">Differential Geometry of Riemannian Manifolds</h3>
+                        <p class="seminar-speaker">Marie Dubois, PhD 2nd year</p>
+                        <p class="seminar-abstract">
+                            An introduction to fundamental concepts in differential geometry, 
+                            with a focus on applications in theoretical physics and general relativity.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 October 22, 2025, 2:00 PM</span>
+                        <h3 class="seminar-title">Representation Theory of Finite Groups</h3>
+                        <p class="seminar-speaker">Thomas Bernard, PhD 3rd year</p>
+                        <p class="seminar-abstract">
+                            Exploration of finite group representations and their applications 
+                            in number theory and modern cryptography.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 November 5, 2025, 2:00 PM</span>
+                        <h3 class="seminar-title">Variational Methods in Functional Analysis</h3>
+                        <p class="seminar-speaker">Sophie Martin, Master's 2nd year</p>
+                        <p class="seminar-abstract">
+                            Discussion on variational methods and their applications 
+                            to nonlinear partial differential equations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h3>📍 Practical Information</h3>
+                    <p><strong>Location:</strong> Room TBA, Department of Mathematics</p>
+                    <p><strong>Format:</strong> Hybrid (in-person + Zoom)</p>
+                    <p><strong>Duration:</strong> 50 minutes (presentation + Q&A)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="archives" style="background: white;">
+            <div class="container">
+                <h2>Seminar Archives</h2>
+                
+                <div class="seminar-grid">
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 September 20, 2025</span>
+                        <h3 class="seminar-title">Algebraic Topology and Homology Theory</h3>
+                        <p class="seminar-speaker">Jean Lefèvre</p>
+                        <p class="seminar-abstract">
+                            Presentation of homological invariants and their applications 
+                            in modern algebraic topology.
+                        </p>
+                    </div>
+
+                    <div class="seminar-card">
+                        <span class="seminar-date">📅 September 13, 2025</span>
+                        <h3 class="seminar-title">Elliptic Curves and Cryptography</h3>
+                        <p class="seminar-speaker">Alice Moreau</p>
+                        <p class="seminar-abstract">
+                            Study of elliptic curves over finite fields and their applications 
+                            to contemporary cryptographic protocols.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="domaines">
+            <div class="container">
+                <h2>Research Areas</h2>
+                <div class="domains">
+                    <span class="domain-tag">📐 Geometry</span>
+                    <span class="domain-tag">🔢 Algebra</span>
+                    <span class="domain-tag">📊 Analysis</span>
+                    <span class="domain-tag">🌀 Topology</span>
+                    <span class="domain-tag">🔣 Number Theory</span>
+                    <span class="domain-tag">💻 Applied Mathematics</span>
+                    <span class="domain-tag">📈 Probability & Statistics</span>
+                    <span class="domain-tag">⚡ Differential Equations</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="proposer" style="background: white;">
+            <div class="container">
+                <h2>Propose a Presentation</h2>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="nom-en">Full name *</label>
+                            <input type="text" id="nom-en" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-en">Email *</label>
+                            <input type="email" id="email-en" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="programme-en">Program *</label>
+                            <select id="programme-en" required>
+                                <option value="">Select...</option>
+                                <option value="m1">Master's - 1st year</option>
+                                <option value="m2">Master's - 2nd year</option>
+                                <option value="d1">PhD - 1st year</option>
+                                <option value="d2">PhD - 2nd year</option>
+                                <option value="d3">PhD - 3rd year</option>
+                                <option value="d4">PhD - 4th year+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="domaine-en">Research area *</label>
+                            <input type="text" id="domaine-en" placeholder="e.g., Algebraic Geometry" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="titre-en">Presentation title *</label>
+                            <input type="text" id="titre-en" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resume-en">Abstract (200-300 words) *</label>
+                            <textarea id="resume-en" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date-pref-en">Availability</label>
+                            <input type="text" id="date-pref-en" placeholder="e.g., November or December 2025">
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; color: #00703c;">Submit Proposal</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Contact & Information</h2>
+                <div class="contact-form">
+                    <div class="info-box">
+                        <h3>Organizers</h3>
+                        <p><strong>Email:</strong> seminaire.doctorants.math@usherbrooke.ca</p>
+                        <p><strong>Department:</strong> <a href="https://www.usherbrooke.ca/mathematiques/" target="_blank">Department of Mathematics - UdeS</a></p>
+                        <p><strong>Mailing list:</strong> <a href="#">Subscribe to announcements</a></p>
+                    </div>
+
+                    <h3 style="margin: 2rem 0 1rem; color: #00703c;">Contact Us</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="contact-nom-en">Name</label>
+                            <input type="text" id="contact-nom-en">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email-en">Email</label>
+                            <input type="email" id="contact-email-en">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message-en">Message</label>
+                            <textarea id="message-en"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn" style="width: 100%; color: #00703c;">Send</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2025 Graduate Student Seminar in Mathematics - Université de Sherbrooke</p>
+                <p style="margin-top: 0.5rem; opacity: 0.8;">An academic forum organized by and for graduate students</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Gestion du changement de langue
+        function switchLanguage(lang) {
+            // Cacher tous les contenus
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Afficher le contenu de la langue sélectionnée
+            document.querySelectorAll('.lang-' + lang).forEach(el => {
+                el.classList.add('active');
+            });
+            
+            // Mettre à jour les boutons de langue
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.lang-btn[data-lang="' + lang + '"]').classList.add('active');
+            
+            // Sauvegarder la préférence dans le navigateur
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Mettre à jour l'attribut lang du HTML
+            document.documentElement.lang = lang;
+        }
+        
+        // Charger la langue préférée au chargement de la page
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && savedLang !== 'fr') {
+                switchLanguage(savedLang);
+            }
+        });
+
+        // Smooth scrolling pour les liens de navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gestion des formulaires
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const currentLang = document.documentElement.lang;
+                const message = currentLang === 'fr' 
+                    ? 'Merci ! Votre message a été envoyé. (Cette fonctionnalité nécessite un backend pour fonctionner réellement)'
+                    : 'Thank you! Your message has been sent. (This functionality requires a backend to work properly)';
+                alert(message);
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
