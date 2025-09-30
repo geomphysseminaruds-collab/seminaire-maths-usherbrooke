@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives - Graduate Student Seminar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00703c 0%, #008d4c 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-section img {
+            height: 50px;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .title-section h1 {
+            font-size: 1.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-left: 0.5rem;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: white;
+            color: #00703c;
+        }
+
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: #00703c;
+            color: white;
+        }
+
+        .page-title {
+            background: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            color: #00703c;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .filter-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-controls select, .filter-controls input {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .filter-controls button {
+            padding: 0.8rem 1.5rem;
+            background: #00703c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .filter-controls button:hover {
+            background: #008d4c;
+        }
+
+        .year-divider {
+            background: #00703c;
+            color: white;
+            padding: 1rem;
+            margin: 2rem 0 1.5rem 0;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .archive-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-left: 4px solid #00703c;
+        }
+
+        .archive-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .archive-date {
+            color: #00703c;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .archive-title {
+            font-size: 1.3rem;
+            color: #00703c;
+            margin-bottom: 0.8rem;
+        }
+
+        .archive-speaker {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .archive-abstract {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .archive-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #e8f5e9;
+            color: #00703c;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .archive-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .archive-link {
+            color: #00703c;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .archive-link:hover {
+            text-decoration: underline;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        footer {
+            background: #00703c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .archive-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="https://www.usherbrooke.ca/documents/11143/6293498/UdeS_logo_h_rgbweb.png" 
+                         alt="Université de Sherbrooke">
+                    <div class="title-section">
+                        <h1 class="lang-content lang-fr active">Séminaire des Étudiants Diplômés</h1>
+                        <h1 class="lang-content lang-en">Graduate Student Seminar</h1>
+                    </div>
+                </div>
+                <div>
+                    <button class="lang-btn active" onclick="switchLanguage('fr')" data-lang="fr">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation FR -->
+    <nav class="lang-content lang-fr active">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="upcoming-seminars.html">Prochains Séminaires</a></li>
+            <li><a href="archives.html" class="active">Archives</a></li>
+            <li><a href="members.html">Membres</a></li>
+            <li><a href="index.html#proposer">Proposer un Talk</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Navigation EN -->
+    <nav class="lang-content lang-en">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="upcoming-seminars.html">Upcoming Seminars</a></li>
+            <li><a href="archives.html" class="active">Archives</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="index.html#proposer">Propose a Talk</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENU FRANÇAIS -->
+    <div class="lang-content lang-fr active">
+        <div class="page-title">
+            <div class="container">
+                <h1>📚 Archives des Séminaires</h1>
+                <p>Historique complet des présentations passées</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <select>
+                        <option value="">Toutes les années</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                    </select>
+                    <select>
+                        <option value="">Tous les domaines</option>
+                        <option value="geometrie">Géométrie</option>
+                        <option value="algebre">Algèbre</option>
+                        <option value="analyse">Analyse</option>
+                        <option value="topologie">Topologie</option>
+                        <option value="appliquees">Mathématiques Appliquées</option>
+                    </select>
+                    <input type="text" placeholder="Rechercher par mot-clé...">
+                    <button>🔍 Filtrer</button>
+                </div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="year-divider">2025</div>
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <div class="archive-date">📅 20 septembre 2025</div>
+                    <h3 class="archive-title">Topologie algébrique et théorie de l'homologie</h3>
+                    <p class="archive-speaker">Jean Lefèvre, Doctorat 4ème année</p>
+                    <p class="archive-abstract">
+                        Présentation des invariants homologiques et leurs applications en topologie algébrique moderne. 
+                        Discussion sur les groupes d'homologie, cohomologie et leurs applications aux variétés différentiables.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Topologie</span>
+                        <span class="tag">Algèbre</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Vidéo</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 13 septembre 2025</div>
+                    <h3 class="archive-title">Courbes elliptiques et cryptographie</h3>
+                    <p class="archive-speaker">Alice Moreau, Doctorat 3ème année</p>
+                    <p class="archive-abstract">
+                        Étude des courbes elliptiques sur les corps finis et leurs applications aux protocoles 
+                        cryptographiques contemporains. Focus sur ECDSA et les protocoles d'échange de clés.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Théorie des Nombres</span>
+                        <span class="tag">Cryptographie</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Vidéo</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 28 août 2025</div>
+                    <h3 class="archive-title">Analyse harmonique sur les groupes de Lie</h3>
+                    <p class="archive-speaker">Pierre Dubé, Maîtrise 2ème année</p>
+                    <p class="archive-abstract">
+                        Introduction à l'analyse harmonique sur les groupes de Lie compacts. 
+                        Discussion de la théorie de Peter-Weyl et applications en physique quantique.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Analyse</span>
+                        <span class="tag">Groupes de Lie</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="year-divider">2024</div>
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <div class="archive-date">📅 5 décembre 2024</div>
+                    <h3 class="archive-title">Systèmes dynamiques et théorie du chaos</h3>
+                    <p class="archive-speaker">Émilie Gagnon, Doctorat 2ème année</p>
+                    <p class="archive-abstract">
+                        Exploration des systèmes dynamiques non-linéaires et introduction à la théorie du chaos. 
+                        Exemples classiques incluant l'attracteur de Lorenz et les applications en météorologie.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Systèmes Dynamiques</span>
+                        <span class="tag">Analyse</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Vidéo</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 21 novembre 2024</div>
+                    <h3 class="archive-title">Théorie spectrale des opérateurs auto-adjoints</h3>
+                    <p class="archive-speaker">Marc Lavoie, Doctorat 3ème année</p>
+                    <p class="archive-abstract">
+                        Présentation de la théorie spectrale des opérateurs auto-adjoints sur les espaces de Hilbert. 
+                        Applications à la mécanique quantique et aux équations différentielles.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Analyse Fonctionnelle</span>
+                        <span class="tag">EDP</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 7 novembre 2024</div>
+                    <h3 class="archive-title">Optimisation combinatoire et théorie des graphes</h3>
+                    <p class="archive-speaker">Julie Bergeron, Maîtrise 1ère année</p>
+                    <p class="archive-abstract">
+                        Introduction aux problèmes d'optimisation combinatoire avec focus sur les algorithmes de graphes. 
+                        Discussion de problèmes NP-complets et méthodes d'approximation.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Mathématiques Discrètes</span>
+                        <span class="tag">Optimisation</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Vidéo</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 24 octobre 2024</div>
+                    <h3 class="archive-title">Géométrie algébrique et schémas</h3>
+                    <p class="archive-speaker">David Tremblay, Doctorat 4ème année</p>
+                    <p class="archive-abstract">
+                        Introduction moderne à la géométrie algébrique via la théorie des schémas. 
+                        Présentation des concepts fondamentaux de Grothendieck et applications contemporaines.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Géométrie Algébrique</span>
+                        <span class="tag">Algèbre</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 10 octobre 2024</div>
+                    <h3 class="archive-title">Processus stochastiques et chaînes de Markov</h3>
+                    <p class="archive-speaker">Sarah Côté, Maîtrise 2ème année</p>
+                    <p class="archive-abstract">
+                        Étude des processus stochastiques à temps discret et continu. Focus sur les chaînes de Markov 
+                        et leurs applications en finance et en biologie.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Probabilités</span>
+                        <span class="tag">Statistiques</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Vidéo</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 26 septembre 2024</div>
+                    <h3 class="archive-title">Équations différentielles stochastiques</h3>
+                    <p class="archive-speaker">Antoine Roy, Doctorat 2ème année</p>
+                    <p class="archive-abstract">
+                        Introduction aux équations différentielles stochastiques et au calcul d'Itô. 
+                        Applications en finance quantitative et modélisation de phénomènes aléatoires.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">EDS</span>
+                        <span class="tag">Analyse</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENU ANGLAIS -->
+    <div class="lang-content lang-en">
+        <div class="page-title">
+            <div class="container">
+                <h1>📚 Seminar Archives</h1>
+                <p>Complete history of past presentations</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="filter-section">
+                <div class="filter-controls">
+                    <select>
+                        <option value="">All years</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                    </select>
+                    <select>
+                        <option value="">All areas</option>
+                        <option value="geometry">Geometry</option>
+                        <option value="algebra">Algebra</option>
+                        <option value="analysis">Analysis</option>
+                        <option value="topology">Topology</option>
+                        <option value="applied">Applied Mathematics</option>
+                    </select>
+                    <input type="text" placeholder="Search by keyword...">
+                    <button>🔍 Filter</button>
+                </div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="year-divider">2025</div>
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <div class="archive-date">📅 September 20, 2025</div>
+                    <h3 class="archive-title">Algebraic Topology and Homology Theory</h3>
+                    <p class="archive-speaker">Jean Lefèvre, PhD 4th year</p>
+                    <p class="archive-abstract">
+                        Presentation of homological invariants and their applications in modern algebraic topology. 
+                        Discussion on homology groups, cohomology and their applications to differentiable manifolds.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Topology</span>
+                        <span class="tag">Algebra</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Video</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 September 13, 2025</div>
+                    <h3 class="archive-title">Elliptic Curves and Cryptography</h3>
+                    <p class="archive-speaker">Alice Moreau, PhD 3rd year</p>
+                    <p class="archive-abstract">
+                        Study of elliptic curves over finite fields and their applications to contemporary 
+                        cryptographic protocols. Focus on ECDSA and key exchange protocols.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Number Theory</span>
+                        <span class="tag">Cryptography</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Video</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 August 28, 2025</div>
+                    <h3 class="archive-title">Harmonic Analysis on Lie Groups</h3>
+                    <p class="archive-speaker">Pierre Dubé, Master's 2nd year</p>
+                    <p class="archive-abstract">
+                        Introduction to harmonic analysis on compact Lie groups. 
+                        Discussion of Peter-Weyl theory and applications in quantum physics.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Analysis</span>
+                        <span class="tag">Lie Groups</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="year-divider">2024</div>
+            <div class="archive-grid">
+                <div class="archive-card">
+                    <div class="archive-date">📅 December 5, 2024</div>
+                    <h3 class="archive-title">Dynamical Systems and Chaos Theory</h3>
+                    <p class="archive-speaker">Émilie Gagnon, PhD 2nd year</p>
+                    <p class="archive-abstract">
+                        Exploration of nonlinear dynamical systems and introduction to chaos theory. 
+                        Classical examples including the Lorenz attractor and applications in meteorology.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Dynamical Systems</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Video</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 November 21, 2024</div>
+                    <h3 class="archive-title">Spectral Theory of Self-Adjoint Operators</h3>
+                    <p class="archive-speaker">Marc Lavoie, PhD 3rd year</p>
+                    <p class="archive-abstract">
+                        Presentation of spectral theory of self-adjoint operators on Hilbert spaces. 
+                        Applications to quantum mechanics and differential equations.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Functional Analysis</span>
+                        <span class="tag">PDE</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 November 7, 2024</div>
+                    <h3 class="archive-title">Combinatorial Optimization and Graph Theory</h3>
+                    <p class="archive-speaker">Julie Bergeron, Master's 1st year</p>
+                    <p class="archive-abstract">
+                        Introduction to combinatorial optimization problems with focus on graph algorithms. 
+                        Discussion of NP-complete problems and approximation methods.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Discrete Mathematics</span>
+                        <span class="tag">Optimization</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Video</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 October 24, 2024</div>
+                    <h3 class="archive-title">Algebraic Geometry and Schemes</h3>
+                    <p class="archive-speaker">David Tremblay, PhD 4th year</p>
+                    <p class="archive-abstract">
+                        Modern introduction to algebraic geometry via scheme theory. 
+                        Presentation of Grothendieck's fundamental concepts and contemporary applications.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Algebraic Geometry</span>
+                        <span class="tag">Algebra</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 October 10, 2024</div>
+                    <h3 class="archive-title">Stochastic Processes and Markov Chains</h3>
+                    <p class="archive-speaker">Sarah Côté, Master's 2nd year</p>
+                    <p class="archive-abstract">
+                        Study of discrete and continuous-time stochastic processes. Focus on Markov chains 
+                        and their applications in finance and biology.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">Probability</span>
+                        <span class="tag">Statistics</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">🎥 Video</a>
+                    </div>
+                </div>
+
+                <div class="archive-card">
+                    <div class="archive-date">📅 September 26, 2024</div>
+                    <h3 class="archive-title">Stochastic Differential Equations</h3>
+                    <p class="archive-speaker">Antoine Roy, PhD 2nd year</p>
+                    <p class="archive-abstract">
+                        Introduction to stochastic differential equations and Itô calculus. 
+                        Applications in quantitative finance and modeling of random phenomena.
+                    </p>
+                    <div class="archive-tags">
+                        <span class="tag">SDE</span>
+                        <span class="tag">Analysis</span>
+                    </div>
+                    <div class="archive-links">
+                        <a href="#" class="archive-link">📄 Slides</a>
+                        <a href="#" class="archive-link">📝 Notes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="lang-content lang-fr active">&copy; 2025 Séminaire des Étudiants Diplômés - Université de Sherbrooke</p>
+            <p class="lang-content lang-en">&copy; 2025 Graduate Student Seminar - Université de Sherbrooke</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.lang-' + lang).forEach(el => {
+                el.classList.add('active');
+            });
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.lang-btn[data-lang="' + lang + '"]').classList.add('active');
+            
+            localStorage.setItem('preferredLanguage', lang);
+            document.documentElement.lang = lang;
+        }
+        
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && savedLang !== 'fr') {
+                switchLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
