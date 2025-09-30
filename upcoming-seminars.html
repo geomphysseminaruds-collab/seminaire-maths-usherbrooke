@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Seminars - Graduate Student Seminar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #00703c 0%, #008d4c 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-section img {
+            height: 50px;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .title-section h1 {
+            font-size: 1.5rem;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-left: 0.5rem;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: white;
+            color: #00703c;
+        }
+
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: #00703c;
+            color: white;
+        }
+
+        .page-title {
+            background: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            color: #00703c;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .seminar-list {
+            padding: 2rem 0;
+        }
+
+        .seminar-item {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border-left: 5px solid #00703c;
+            transition: transform 0.3s;
+        }
+
+        .seminar-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .seminar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .seminar-date-time {
+            background: #00703c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .seminar-status {
+            background: #4caf50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .seminar-title {
+            font-size: 1.8rem;
+            color: #00703c;
+            margin-bottom: 1rem;
+        }
+
+        .seminar-speaker {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker-name {
+            color: #00703c;
+            font-weight: bold;
+        }
+
+        .seminar-abstract {
+            color: #555;
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .seminar-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-item strong {
+            color: #00703c;
+        }
+
+        .zoom-link {
+            background: #2196F3;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .zoom-link:hover {
+            background: #1976D2;
+            transform: scale(1.05);
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        footer {
+            background: #00703c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .seminar-header {
+                flex-direction: column;
+            }
+
+            .seminar-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="https://www.usherbrooke.ca/documents/11143/6293498/UdeS_logo_h_rgbweb.png" 
+                         alt="Université de Sherbrooke">
+                    <div class="title-section">
+                        <h1 class="lang-content lang-fr active">Séminaire des Étudiants Diplômés</h1>
+                        <h1 class="lang-content lang-en">Graduate Student Seminar</h1>
+                    </div>
+                </div>
+                <div>
+                    <button class="lang-btn active" onclick="switchLanguage('fr')" data-lang="fr">FR</button>
+                    <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation FR -->
+    <nav class="lang-content lang-fr active">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="upcoming-seminars.html" class="active">Prochains Séminaires</a></li>
+            <li><a href="archives.html">Archives</a></li>
+            <li><a href="members.html">Membres</a></li>
+            <li><a href="index.html#proposer">Proposer un Talk</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Navigation EN -->
+    <nav class="lang-content lang-en">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="upcoming-seminars.html" class="active">Upcoming Seminars</a></li>
+            <li><a href="archives.html">Archives</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="index.html#proposer">Propose a Talk</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- CONTENU FRANÇAIS -->
+    <div class="lang-content lang-fr active">
+        <div class="page-title">
+            <div class="container">
+                <h1>📅 Prochains Séminaires</h1>
+                <p>Calendrier des présentations à venir - Automne 2025</p>
+            </div>
+        </div>
+
+        <div class="container seminar-list">
+            <!-- Séminaire 1 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Mardi 15 octobre 2025<br>
+                        🕐 14h00 - 15h00
+                    </div>
+                    <div class="seminar-status">Confirmé</div>
+                </div>
+                
+                <h2 class="seminar-title">Géométrie différentielle des variétés riemanniennes</h2>
+                
+                <p class="seminar-speaker">
+                    Présenté par <span class="speaker-name">Marie Dubois</span><br>
+                    Doctorat, 2ème année | Directeur: Prof. Jean Lambert
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Résumé:</strong> Cette présentation introduit les concepts fondamentaux de la géométrie différentielle 
+                    des variétés riemanniennes. Nous examinerons les notions de connexions, courbure, et géodésiques. 
+                    Un accent particulier sera mis sur les applications en physique théorique, notamment en relativité générale. 
+                    Nous discuterons également de résultats récents concernant les variétés à courbure constante et leurs propriétés topologiques.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Lieu:</strong> Salle D4-2011, Département de mathématiques
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybride (présentiel + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Domaine:</strong> Géométrie différentielle
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Rejoindre via Zoom</a>
+            </div>
+
+            <!-- Séminaire 2 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Mardi 22 octobre 2025<br>
+                        🕐 14h00 - 15h00
+                    </div>
+                    <div class="seminar-status">Confirmé</div>
+                </div>
+                
+                <h2 class="seminar-title">Théorie des représentations de groupes finis</h2>
+                
+                <p class="seminar-speaker">
+                    Présenté par <span class="speaker-name">Thomas Bernard</span><br>
+                    Doctorat, 3ème année | Directrice: Prof. Sophie Tremblay
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Résumé:</strong> Nous explorerons la théorie des représentations de groupes finis et leurs applications 
+                    en théorie des nombres. La présentation couvrira les représentations linéaires, les caractères, et le théorème 
+                    d'orthogonalité. Nous examinerons également les applications modernes en cryptographie, notamment dans le contexte 
+                    des protocoles de chiffrement basés sur les courbes elliptiques et les réseaux euclidiens.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Lieu:</strong> Salle D4-2011, Département de mathématiques
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybride (présentiel + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Domaine:</strong> Algèbre, Théorie des nombres
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Rejoindre via Zoom</a>
+            </div>
+
+            <!-- Séminaire 3 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Mardi 5 novembre 2025<br>
+                        🕐 14h00 - 15h00
+                    </div>
+                    <div class="seminar-status">Confirmé</div>
+                </div>
+                
+                <h2 class="seminar-title">Méthodes variationnelles en analyse fonctionnelle</h2>
+                
+                <p class="seminar-speaker">
+                    Présenté par <span class="speaker-name">Sophie Martin</span><br>
+                    Maîtrise, 2ème année | Directeur: Prof. Marc Rousseau
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Résumé:</strong> Cette présentation se concentre sur les méthodes variationnelles et leurs applications 
+                    aux équations aux dérivées partielles non-linéaires. Nous discuterons du principe variationnel, des espaces de Sobolev, 
+                    et des théorèmes de point critique. Des exemples concrets seront présentés, incluant l'équation de Schrödinger non-linéaire 
+                    et les problèmes elliptiques semi-linéaires avec conditions aux limites de Dirichlet.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Lieu:</strong> Salle D4-2011, Département de mathématiques
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybride (présentiel + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Domaine:</strong> Analyse fonctionnelle, EDP
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Rejoindre via Zoom</a>
+            </div>
+
+            <!-- Séminaire 4 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Mardi 19 novembre 2025<br>
+                        🕐 14h00 - 15h00
+                    </div>
+                    <div class="seminar-status" style="background: #ff9800;">À confirmer</div>
+                </div>
+                
+                <h2 class="seminar-title">Apprentissage automatique et optimisation convexe</h2>
+                
+                <p class="seminar-speaker">
+                    Présenté par <span class="speaker-name">Alexandre Chen</span><br>
+                    Doctorat, 1ère année | Directrice: Prof. Isabelle Gagnon
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Résumé:</strong> Nous présenterons les fondements mathématiques de l'apprentissage automatique moderne, 
+                    avec un focus sur les méthodes d'optimisation convexe. La présentation couvrira la descente de gradient, 
+                    les méthodes stochastiques, et la régularisation. Nous discuterons également des applications aux réseaux de neurones 
+                    et aux modèles de classification.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Lieu:</strong> À déterminer
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybride (présentiel + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Domaine:</strong> Mathématiques appliquées, Optimisation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENU ANGLAIS -->
+    <div class="lang-content lang-en">
+        <div class="page-title">
+            <div class="container">
+                <h1>📅 Upcoming Seminars</h1>
+                <p>Schedule of upcoming presentations - Fall 2025</p>
+            </div>
+        </div>
+
+        <div class="container seminar-list">
+            <!-- Seminar 1 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Tuesday, October 15, 2025<br>
+                        🕐 2:00 PM - 3:00 PM
+                    </div>
+                    <div class="seminar-status">Confirmed</div>
+                </div>
+                
+                <h2 class="seminar-title">Differential Geometry of Riemannian Manifolds</h2>
+                
+                <p class="seminar-speaker">
+                    Presented by <span class="speaker-name">Marie Dubois</span><br>
+                    PhD, 2nd year | Supervisor: Prof. Jean Lambert
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Abstract:</strong> This presentation introduces fundamental concepts in differential geometry 
+                    of Riemannian manifolds. We will examine notions of connections, curvature, and geodesics. 
+                    Special emphasis will be placed on applications in theoretical physics, particularly in general relativity. 
+                    We will also discuss recent results concerning manifolds with constant curvature and their topological properties.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Location:</strong> Room D4-2011, Department of Mathematics
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybrid (in-person + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Area:</strong> Differential Geometry
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Join via Zoom</a>
+            </div>
+
+            <!-- Seminar 2 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Tuesday, October 22, 2025<br>
+                        🕐 2:00 PM - 3:00 PM
+                    </div>
+                    <div class="seminar-status">Confirmed</div>
+                </div>
+                
+                <h2 class="seminar-title">Representation Theory of Finite Groups</h2>
+                
+                <p class="seminar-speaker">
+                    Presented by <span class="speaker-name">Thomas Bernard</span><br>
+                    PhD, 3rd year | Supervisor: Prof. Sophie Tremblay
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Abstract:</strong> We will explore the representation theory of finite groups and their applications 
+                    in number theory. The presentation will cover linear representations, characters, and the orthogonality theorem. 
+                    We will also examine modern applications in cryptography, particularly in the context of encryption protocols 
+                    based on elliptic curves and Euclidean lattices.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Location:</strong> Room D4-2011, Department of Mathematics
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybrid (in-person + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Area:</strong> Algebra, Number Theory
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Join via Zoom</a>
+            </div>
+
+            <!-- Seminar 3 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Tuesday, November 5, 2025<br>
+                        🕐 2:00 PM - 3:00 PM
+                    </div>
+                    <div class="seminar-status">Confirmed</div>
+                </div>
+                
+                <h2 class="seminar-title">Variational Methods in Functional Analysis</h2>
+                
+                <p class="seminar-speaker">
+                    Presented by <span class="speaker-name">Sophie Martin</span><br>
+                    Master's, 2nd year | Supervisor: Prof. Marc Rousseau
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Abstract:</strong> This presentation focuses on variational methods and their applications 
+                    to nonlinear partial differential equations. We will discuss the variational principle, Sobolev spaces, 
+                    and critical point theorems. Concrete examples will be presented, including the nonlinear Schrödinger equation 
+                    and semi-linear elliptic problems with Dirichlet boundary conditions.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Location:</strong> Room D4-2011, Department of Mathematics
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybrid (in-person + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Area:</strong> Functional Analysis, PDE
+                    </div>
+                </div>
+
+                <a href="#" class="zoom-link">🔗 Join via Zoom</a>
+            </div>
+
+            <!-- Seminar 4 -->
+            <div class="seminar-item">
+                <div class="seminar-header">
+                    <div class="seminar-date-time">
+                        📅 Tuesday, November 19, 2025<br>
+                        🕐 2:00 PM - 3:00 PM
+                    </div>
+                    <div class="seminar-status" style="background: #ff9800;">To be confirmed</div>
+                </div>
+                
+                <h2 class="seminar-title">Machine Learning and Convex Optimization</h2>
+                
+                <p class="seminar-speaker">
+                    Presented by <span class="speaker-name">Alexandre Chen</span><br>
+                    PhD, 1st year | Supervisor: Prof. Isabelle Gagnon
+                </p>
+
+                <div class="seminar-abstract">
+                    <strong>Abstract:</strong> We will present the mathematical foundations of modern machine learning, 
+                    with a focus on convex optimization methods. The presentation will cover gradient descent, 
+                    stochastic methods, and regularization. We will also discuss applications to neural networks 
+                    and classification models.
+                </div>
+
+                <div class="seminar-details">
+                    <div class="detail-item">
+                        <strong>📍 Location:</strong> To be determined
+                    </div>
+                    <div class="detail-item">
+                        <strong>🌐 Format:</strong> Hybrid (in-person + Zoom)
+                    </div>
+                    <div class="detail-item">
+                        <strong>🔖 Area:</strong> Applied Mathematics, Optimization
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="lang-content lang-fr active">&copy; 2025 Séminaire des Étudiants Diplômés - Université de Sherbrooke</p>
+            <p class="lang-content lang-en">&copy; 2025 Graduate Student Seminar - Université de Sherbrooke</p>
+        </div>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.lang-' + lang).forEach(el => {
+                el.classList.add('active');
+            });
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.lang-btn[data-lang="' + lang + '"]').classList.add('active');
+            
+            localStorage.setItem('preferredLanguage', lang);
+            document.documentElement.lang = lang;
+        }
+        
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && savedLang !== 'fr') {
+                switchLanguage(savedLang);
+            }
+        });
+    </script>
+</body>
+</html>
