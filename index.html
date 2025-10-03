@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Séminaire de recherche mathématique - Cycle doctoral| Université de Sherbrooke</title>
+    <title>Séminaire en géométrie et physique mathématique | Université de Sherbrooke</title>
     <style>
         * {
             margin: 0;
@@ -13,28 +13,42 @@
 
         body {
             font-family: 'Georgia', serif;
-            line-height: 1.7;
+            line-height: 1.6;
             color: #333;
-            background: #fff;
+            background: #f8f8f8;
         }
 
-        .top-bar {
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        header {
             background: #00703c;
             color: white;
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
+            padding: 2rem;
+            text-align: center;
         }
 
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        .university-name {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            margin: 1rem 0;
         }
 
         .lang-switch {
+            margin-top: 1rem;
             display: flex;
             gap: 0.5rem;
+            justify-content: center;
         }
 
         .lang-switch button {
@@ -44,6 +58,7 @@
             padding: 0.3rem 0.8rem;
             cursor: pointer;
             font-size: 0.85rem;
+            transition: all 0.3s;
         }
 
         .lang-switch button.active {
@@ -51,46 +66,8 @@
             color: #00703c;
         }
 
-        header {
-            background: white;
-            border-bottom: 1px solid #ddd;
-            padding: 1.5rem 0;
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .logo-section img {
-            height: 70px;
-        }
-
-        .header-title h1 {
-            font-size: 1.8rem;
-            color: #00703c;
-            font-weight: normal;
-        }
-
-        .header-title p {
-            color: #666;
-            font-size: 1rem;
-            margin-top: 0.3rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .lang-switch button:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         nav {
@@ -103,6 +80,11 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0;
         }
 
         nav a {
@@ -114,683 +96,275 @@
             transition: all 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover,
+        nav a.active {
             background: #00703c;
             color: white;
         }
 
-        .hero {
-            background: linear-gradient(rgba(0, 112, 60, 0.85), rgba(0, 112, 60, 0.85)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23004d2a" width="1200" height="400"/></svg>');
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: normal;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero .date {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 1rem;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            padding: 3rem 0;
-        }
-
-        .content-area h2 {
-            color: #00703c;
-            font-size: 1.8rem;
-            font-weight: normal;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #00703c;
-        }
-
-        .content-area h3 {
-            color: #00703c;
-            font-size: 1.3rem;
-            font-weight: normal;
-            margin: 2rem 0 1rem 0;
-        }
-
-        .content-area p {
-            margin-bottom: 1rem;
-            text-align: justify;
-            line-height: 1.8;
-        }
-
-        .content-area ul, .content-area ol {
-            margin-left: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .content-area li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar {
-            background: #f9f9f9;
-            padding: 2rem;
-            border: 1px solid #ddd;
-            height: fit-content;
-        }
-
-        .sidebar h3 {
-            color: #00703c;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
-            border-bottom: 2px solid #00703c;
-            padding-bottom: 0.5rem;
-        }
-
-        .info-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .info-item strong {
-            display: block;
-            color: #00703c;
-            margin-bottom: 0.3rem;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: #00703c;
-            color: white;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            border-radius: 3px;
-            margin: 1rem 0;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-            background: #005a30;
-        }
-
-        .speaker-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .speaker-card {
-            text-align: center;
-            padding: 1.5rem;
-            border: 1px solid #ddd;
-            background: #fafafa;
-        }
-
-        .speaker-card img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            background: #00703c;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin: 0 auto 1rem;
-        }
-
-        .speaker-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #00703c, #008d4c);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-weight: bold;
-        }
-
-        .speaker-card h4 {
-            color: #00703c;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .speaker-card p {
-            font-size: 0.9rem;
-            color: #666;
-            text-align: center;
-        }
-
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        .schedule-table th,
-        .schedule-table td {
-            border: 1px solid #ddd;
+        .organizers {
+            background: #e8f5e9;
             padding: 1rem;
-            text-align: left;
+            margin: 2rem;
+            border-left: 4px solid #00703c;
+            font-size: 0.95rem;
         }
 
-        .schedule-table th {
-            background: #00703c;
-            color: white;
-            font-weight: normal;
-        }
-
-        .schedule-table tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        .time-slot {
-            font-weight: bold;
+        .organizers a {
             color: #00703c;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        footer {
-            background: #333;
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-            text-align: center;
+        .organizers a:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #fff9e6;
+            padding: 1.5rem;
+            margin: 2rem;
+            border: 1px solid #ffd54f;
+            border-radius: 4px;
+        }
+
+        .info-box p {
+            margin-bottom: 0.8rem;
+        }
+
+        .info-box p:last-child {
+            margin-bottom: 0;
         }
 
         .lang-content {
             display: none;
+            padding: 2rem;
         }
 
         .lang-content.active {
             display: block;
         }
 
-        @media (max-width: 968px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
+        .section-title {
+            color: #00703c;
+            font-size: 1.6rem;
+            font-weight: normal;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #00703c;
+        }
 
-            .hero h1 {
-                font-size: 2rem;
+        .seminar-item {
+            background: #fafafa;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid #00703c;
+            position: relative;
+        }
+
+        .upcoming-label {
+            display: inline-block;
+            background: #00703c;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.8rem;
+        }
+
+        .seminar-title {
+            color: #00703c;
+            font-size: 1.3rem;
+            font-weight: normal;
+            margin-bottom: 0.8rem;
+        }
+
+        .seminar-meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .seminar-speaker {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .seminar-speaker a {
+            color: #00703c;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .seminar-speaker a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #00703c;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
             }
 
             nav ul {
                 flex-direction: column;
             }
+
+            .lang-content {
+                padding: 1rem;
+            }
+
+            .organizers,
+            .info-box {
+                margin: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="container">
-            <div>Université de Sherbrooke | Département de mathématiques</div>
+    <div class="container">
+        <header>
+            <div class="university-name">Université de Sherbrooke · Département de mathématiques</div>
+            <h1 class="lang-content lang-fr active">Séminaire en géométrie et physique mathématique</h1>
+            <h1 class="lang-content lang-en">Seminar in Geometry and Mathematical Physics</h1>
             <div class="lang-switch">
                 <button class="active" onclick="switchLanguage('fr')" data-lang="fr">Français</button>
                 <button onclick="switchLanguage('en')" data-lang="en">English</button>
             </div>
+        </header>
+
+        <nav class="lang-content lang-fr active">
+            <ul>
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="upcoming.html">Séminaires à venir</a></li>
+                <li><a href="past.html">Séminaires passés</a></li>
+                <li><a href="members.html">Membres du groupe</a></li>
+                <li><a href="events.html">Événements</a></li>
+                <li><a href="gallery.html">Galerie</a></li>
+            </ul>
+        </nav>
+
+        <nav class="lang-content lang-en">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="upcoming.html">Upcoming Seminars</a></li>
+                <li><a href="past.html">Past Seminars</a></li>
+                <li><a href="members.html">Group Members</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+            </ul>
+        </nav>
+
+        <!-- VERSION FRANÇAISE -->
+        <div class="lang-content lang-en">
+            <div class="organizers">
+                <strong>Organizers:</strong> 
+                <a href="#">Mohamed Moussadek Maiza</a>, 
+                <a href="#">Yassine Ait Mohamed</a>, and 
+            </div>
+
+            <div class="info-box">
+                <p><strong>Horaire :</strong> Les mardis à 15h30 au local D1-2009</p>
+                <p>Un café est servi avant la conférence au salon du 4e étage.</p>
+                <p>Le séminaire couvre la géométrie algébrique symplectique, la théorie de Lie, les structures de Poisson, la géométrie complexe et hyperkählérienne, et la physique mathématique.</p>
+            </div>
+
+            <h2 class="section-title">Bienvenue</h2>
+            <p>Le Séminaire en géométrie et physique mathématique de l'Université de Sherbrooke est un forum de recherche hebdomadaire dédié aux développements récents en géométrie et physique mathématique.</p>
+            
+            <p style="margin-top: 1rem;">Nos recherches couvrent un large spectre incluant :</p>
+            <ul style="margin: 1rem 0 1rem 2rem; line-height: 1.8;">
+                <li><strong>Géométrie algébrique symplectique :</strong> variétés symplectiques, structures de Poisson, quantification</li>
+                <li><strong>Théorie de Lie :</strong> groupes de Lie, algèbres de Lie, représentations</li>
+                <li><strong>Géométrie de Poisson :</strong> structures de Poisson, groupoïdes symplectiques, feuilletages</li>
+                <li><strong>Géométrie complexe et hyperkählérienne :</strong> variétés de Calabi-Yau, métriques spéciales</li>
+                <li><strong>Physique mathématique :</strong> mécanique quantique, théorie des champs, théorie des cordes</li>
+                <li><strong>Algèbre quantique :</strong> groupes quantiques, déformations, catégorification</li>
+            </ul>
+
+            <h2 class="section-title">Prochains séminaires</h2>
+            <div class="seminar-item">
+                <span class="upcoming-label">À VENIR</span>
+                <h3 class="seminar-title">Invariants de Vafa-Witten et anomalies modulaires</h3>
+                <div class="seminar-meta">
+                    <span><strong>Date :</strong> Mardi 14 octobre 2025, 15h30</span>
+                </div>
+                <div class="seminar-speaker">
+                    <a href="#">Prof. Sergey Alexandrov</a>, Université de Montpellier
+                </div>
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <a href="upcoming.html" style="color: #00703c; font-weight: 600; text-decoration: none; border-bottom: 2px solid #00703c;">Voir tous les séminaires à venir →</a>
+            </p>
         </div>
+
+        <!-- VERSION ANGLAISE -->
+        <div class="lang-content lang-en">
+            <div class="organizers">
+                <strong>Organizers:</strong> 
+                <a href="#">Mohamed Moussadek Maiza</a>, 
+                <a href="#">Yassine Ait Mohamed</a>, and 
+            </div>
+
+            <div class="info-box">
+                <p><strong>Schedule:</strong> Tuesdays at 3:30 PM in room D1-2009</p>
+                <p>Coffee is served before the talk in the 4th floor lounge.</p>
+                <p>The seminar covers symplectic algebraic geometry, Lie theory, Poisson structures, complex and hyperkähler geometry, and mathematical physics.</p>
+            </div>
+
+            <h2 class="section-title">Welcome</h2>
+            <p>The Seminar in Geometry and Mathematical Physics at Université de Sherbrooke is a weekly research forum dedicated to recent developments in geometry and mathematical physics.</p>
+            
+            <p style="margin-top: 1rem;">Our research covers a broad spectrum including:</p>
+            <ul style="margin: 1rem 0 1rem 2rem; line-height: 1.8;">
+                <li><strong>Symplectic algebraic geometry:</strong> symplectic manifolds, Poisson structures, quantization</li>
+                <li><strong>Lie theory:</strong> Lie groups, Lie algebras, representations</li>
+                <li><strong>Poisson geometry:</strong> Poisson structures, symplectic groupoids, foliations</li>
+                <li><strong>Complex and hyperkähler geometry:</strong> Calabi-Yau manifolds, special metrics</li>
+                <li><strong>Mathematical physics:</strong> quantum mechanics, field theory, string theory</li>
+                <li><strong>Quantum algebra:</strong> quantum groups, deformations, categorification</li>
+            </ul>
+
+            <h2 class="section-title">Upcoming Seminars</h2>
+            <div class="seminar-item">
+                <span class="upcoming-label">UPCOMING</span>
+                <h3 class="seminar-title">Vafa-Witten invariants from modular anomaly</h3>
+                <div class="seminar-meta">
+                    <span><strong>Date:</strong> Tuesday, October 14, 2025, 3:30 PM</span>
+                </div>
+                <div class="seminar-speaker">
+                    <a href="#">Prof. Sergey Alexandrov</a>, University of Montpellier
+                </div>
+            </div>
+
+            <p style="margin-top: 1.5rem;">
+                <a href="upcoming.html" style="color: #00703c; font-weight: 600; text-decoration: none; border-bottom: 2px solid #00703c;">See all upcoming seminars →</a>
+            </p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Université de Sherbrooke - Département de mathématiques</p>
+            <p style="margin-top: 0.5rem;">Contact: <a href="mailto:geometrie.seminaire@usherbrooke.ca" style="color: #00703c; text-decoration: none;">geometrie.seminaire@usherbrooke.ca</a></p>
+        </footer>
     </div>
-
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <img src="https://www.usherbrooke.ca/documents/11143/6293498/UdeS_logo_h_rgbweb.png" 
-                         alt="Université de Sherbrooke">
-                </div>
-                <div class="header-title">
-                    <h1 class="lang-content lang-fr active">Séminaire de recherche mathématique - Cycle doctoral</h1>
-                    <h1 class="lang-content lang-en">Mathematics Research Seminar - Doctoral Cycle</h1>
-                    
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <nav class="lang-content lang-fr active">
-        <ul>
-            <li><a href="#overview" class="active">Vue d'ensemble</a></li>
-            <li><a href="#programme">Programme</a></li>
-            <li><a href="#speakers">Conférenciers</a></li>
-            <li><a href="#registration">Inscription</a></li>
-            <li><a href="#practical">Informations pratiques</a></li>
-            <li><a href="#organisers">Organisateurs</a></li>
-        </ul>
-    </nav>
-
-    <nav class="lang-content lang-en">
-        <ul>
-            <li><a href="#overview" class="active">Overview</a></li>
-            <li><a href="#programme">Programme</a></li>
-            <li><a href="#speakers">Speakers</a></li>
-            <li><a href="#registration">Registration</a></li>
-            <li><a href="#practical">Practical Information</a></li>
-            <li><a href="#organisers">Organisers</a></li>
-        </ul>
-    </nav>
-
-    <!-- VERSION FRANÇAISE -->
-    <div class="lang-content lang-fr active">
-        <div class="hero">
-            <div class="container">
-                <h1>Séminaire de recherche mathématique - Cycle doctoral<h1>
-                <p>Université de Sherbrooke</p>
-            </div>
-        </div>
-
-        <div class="container main-content">
-            <div class="content-area">
-                <section id="overview">
-                    <h2>Vue d'ensemble</h2>
-                    <p>
-                        Le Séminaire de Recherche Doctoral en Mathématiques est une initiative académique du département de mathématiques de l'Université de Sherbrooke. Ce séminaire régulier offre une plateforme d'échange pour les doctorants, postdoctorants et professeurs invités de présenter leurs travaux de recherche. Il constitue un espace privilégié pour partager des idées, discuter des avancées scientifiques et tisser des liens au sein de la communauté mathématique.
-                    </p>
-                    
-                
-                    <h3>Objectifs</h3>
-                    <ul>
-                        <li>Promouvoir l'excellence en recherche mathématique chez les jeunes chercheurs</li>
-                        <li>Faciliter les échanges scientifiques entre étudiants de différentes institutions</li>
-                        <li>Développer les compétences en présentation et communication scientifique</li>
-                        <li>Encourager les collaborations interdisciplinaires</li>
-                        <li>Créer des opportunités de réseautage professionnel</li>
-                    </ul>
-
-                    <h3>Thèmes principaux</h3>
-                    <p>Cette édition couvrira un large éventail de domaines mathématiques :</p>
-                    <ul>
-                        <li><strong>Géométrie différentielle et algébrique</strong> - Variétés riemanniennes, schémas, cohomologie</li>
-                        <li><strong>Algèbre et théorie des nombres</strong> - Représentations, groupes, cryptographie</li>
-                        <li><strong>Analyse fonctionnelle et EDP</strong> - Espaces de Sobolev, méthodes variationnelles</li>
-                        <li><strong>Topologie algébrique</strong> - Homologie, homotopie, théorie K</li>
-                        <li><strong>Mathématiques appliquées</strong> - Optimisation, apprentissage automatique, modélisation</li>
-                        <li><strong>Probabilités et statistiques</strong> - Processus stochastiques, inférence bayésienne</li>
-                    </ul>
-                </section>
-
-               
-                <section id="speakers">
-                    <h2>Conférenciers invités</h2>
-                    
-                    <div class="speaker-grid">
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">CL</div>
-                            <h4>Prof. ...c</h4>
-                            <p>Université de...</p>
-                            <p><em>Géométrie algébrique</em></p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">MR</div>
-                            <h4>Prof. </h4>
-                            <p>Université ... </p>
-                            <p><em>Analyse fonctionnelle</em></p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">ST</div>
-                            <h4>Prof. </h4>
-                            <p>.. </p>
-                            <p><em>Théorie des représentations</em></p>
-                        </div>
-
-                
-                    </div>
-                </section>
-
-                <section id="registration">
-                    <h2>Inscription</h2>
-                    
-                    <p>
-                        Les inscriptions sont ouvertes à tous les doctorants en mathématiques 
-                        et domaines connexes. Les places sont limitées à 80 participants.
-                    </p>
-
-                    <h3>Dates importantes</h3>
-                    <ul>
-                        <li><strong>15 décembre 2026</strong> - Date limite pour soumettre un résumé de présentation</li>
-                        <li><strong>15 janvier 2026</strong> - Notification d'acceptation des présentations</li>
-                        <li><strong>25 janvier 2026</strong> - Date limite d'inscription régulière</li>
-                        <li><strong>5 février 2026</strong> - Date limite d'inscription tardive</li>
-                    </ul>
-
-                    <h3>Frais d'inscription</h3>
-                    <ul>
-                        <li>Étudiants UdeS : <strong>Gratuit</strong></li>
-                        <li>Étudiants autres institutions : <strong>50 $ CAD</strong></li>
-                        <li>Inscription tardive : <strong>75 $ CAD</strong></li>
-                    </ul>
-
-                    <p>Les frais incluent : accès à toutes les sessions, matériel de conférence, repas (déjeuners et pauses café), réception de bienvenue.</p>
-
-                    <a href="#" class="btn-primary">S'inscrire maintenant</a>
-                    <a href="#" class="btn-primary">Soumettre un résumé</a>
-                </section>
-
-                <section id="practical">
-                    <h2>Informations pratiques</h2>
-                    
-                    <h3>Lieu</h3>
-                    <p>
-                        <strong>Département de mathématiques</strong><br>
-                        Université de Sherbrooke<br>
-                        2500, boulevard de l'Université<br>
-                        Sherbrooke (Québec) J1K 2R1<br>
-                        Canada
-                </section>
-
-                <section id="organisers">
-                    <h2>Comité organisateur</h2>
-                    
-                    <div class="speaker-grid">
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">MD</div>
-                            <h4>.......</h4>
-                            <p>Présidente du comité</p>
-                            <p>Doctorat, 2ème année</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">TB</div>
-                            <h4>....</h4>
-                            <p>Vice-président</p>
-                            <p>Doctorat, 3ème année</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">SM</div>
-                            <h4>......</h4>
-                            <p>Communications</p>
-                            <p>Maîtrise, 2ème année</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">AC</div>
-                            <h4>.......</h4>
-                            <p>Logistique</p>
-                            <p>Doctorat, 1ère année</p>
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 2rem;">
-                        <strong>Contact :</strong> semaine.doctorants@usherbrooke.ca
-                    </p>
-                </section>
-            </div>
-
-            <aside class="sidebar">
-                <h3>Informations clés</h3>
-                
-                <div class="info-item">
-                    <strong>📅 Dates</strong>
-                    10-14 février 2025
-                </div>
-
-                <div class="info-item">
-                    <strong>📍 Lieu</strong>
-                    Université de Sherbrooke<br>
-                    Département de mathématiques
-                </div>
-
-                <div class="info-item">
-                    <strong>🌐 Format</strong>
-                    Hybride (présentiel + en ligne)
-                </div>
-
-                <div class="info-item">
-                    <strong>👥 Participants</strong>
-                    80 places maximum
-                </div>
-
-                <div class="info-item">
-                    <strong>💰 Inscription</strong>
-                    Gratuite pour étudiants UdeS<br>
-                    50 $ CAD autres institutions
-                </div>
-
-                <div class="info-item">
-                    <strong>📧 Contact</strong>
-                    semaine.doctorants@usherbrooke.ca
-                </div>
-
-                <a href="#" class="btn-primary" style="width: 100%; text-align: center; display: block;">S'inscrire</a>
-
-                <h3 style="margin-top: 2rem;">Liens utiles</h3>
-                <ul style="list-style: none; margin-left: 0;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Programme complet (PDF)</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Soumettre un résumé</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Plan du campus</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="https://www.usherbrooke.ca/mathematiques/" style="color: #00703c; text-decoration: none;">→ Département de mathématiques</a></li>
-                </ul>
-
-                
-                
-            </aside>
-        </div>
-    </div>
-
-    <!-- VERSION ANGLAISE -->
-    <div class="lang-content lang-en">
-        <div class="hero">
-            <div class="container">
-                <h1>Mathematics Research Seminar - Doctoral Cycle</h1>
-                <p>Université de Sherbrooke</p>
-            </div>
-        </div>
-
-        <div class="container main-content">
-            <div class="content-area">
-                <section id="overview">
-                    <h2>Overview</h2>
-                    <p>
-                        The Doctoral Research Seminar in Mathematics is an academic initiative of the Mathematics Department at the Université de Sherbrooke. This regular seminar provides a platform for PhD students, postdoctoral researchers, and invited faculty to present their research work. It offers a unique space for sharing ideas, discussing scientific advances, and building connections within the mathematical community.
-                    </p>
-                    
-                    
-
-                    <h3>Objectives</h3>
-                    <ul>
-                        <li>Promote excellence in mathematical research among young researchers</li>
-                        <li>Facilitate scientific exchanges between students from different institutions</li>
-                        <li>Develop presentation and scientific communication skills</li>
-                        <li>Encourage interdisciplinary collaborations</li>
-                        <li>Create professional networking opportunities</li>
-                    </ul>
-
-                    <h3>Main Themes</h3>
-                    <p>This edition will cover a wide range of mathematical fields:</p>
-                    <ul>
-                        <li><strong>Differential and Algebraic Geometry</strong> - Riemannian manifolds, schemes, cohomology</li>
-                        <li><strong>Algebra and Number Theory</strong> - Representations, groups, cryptography</li>
-                        <li><strong>Functional Analysis and PDE</strong> - Sobolev spaces, variational methods</li>
-                        <li><strong>Algebraic Topology</strong> - Homology, homotopy, K-theory</li>
-                        <li><strong>Applied Mathematics</strong> - Optimization, machine learning, modeling</li>
-                        <li><strong>Probability and Statistics</strong> - Stochastic processes, Bayesian inference</li>
-                    </ul>
-                </section>
-
-                
-
-                <section id="speakers">
-                    <h2>Invited Speakers</h2>
-                    
-                    <div class="speaker-grid">
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">CL</div>
-                            <h4>Prof. ...</h4>
-                            <p>Université de......</p>
-                            <p><em>Algebraic Geometry</em></p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">MR</div>
-                            <h4>Prof. Marc ...</h4>
-                            <p>Université .....</p>
-                            <p><em>Functional Analysis</em></p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">ST</div>
-                            <h4>Dr. ...</h4>
-                            <p>.....</p>
-                            <p><em>Representation Theory</em></p>
-                        </div>
-
-                        
-                </section>
-
-                <section id="registration">
-                    <h2>Registration</h2>
-                    
-                    <p>
-                        Registration is open to all doctoral students (PhD) in mathematics 
-                        and related fields. Places are limited to 80 participants.
-                    </p>
-
-                    <h3>Important Dates</h3>
-                    <ul>
-                        <li><strong>December 15, 2026</strong> - Deadline for abstract submission</li>
-                        <li><strong>January 15, 2026</strong> - Notification of presentation acceptance</li>
-                        <li><strong>January 25, 2026</strong> - Regular registration deadline</li>
-                        <li><strong>February 5, 2026</strong> - Late registration deadline</li>
-                    </ul>
-
-                    <h3>Registration Fees</h3>
-                    <ul>
-                        <li>UdeS Students: <strong>Free</strong></li>
-                        <li>Students from other institutions: <strong>$50 CAD</strong></li>
-                        <li>Late registration: <strong>$75 CAD</strong></li>
-                    </ul>
-
-                    <p>Fees include: access to all sessions, conference materials, meals (lunches and coffee breaks), welcome reception.</p>
-
-                    <a href="#" class="btn-primary">Register Now</a>
-                    <a href="#" class="btn-primary">Submit an Abstract</a>
-                </section>
-
-                <section id="practical">
-                    <h2>Practical Information</h2>
-                    
-                    <h3>Venue</h3>
-                    <p>
-                        <strong>Department of Mathematics</strong><br>
-                        Université de Sherbrooke<br>
-                        2500, boulevard de l'Université<br>
-                        Sherbrooke (Quebec) J1K 2R1<br>
-                        Canada
-                    </p>
-
-                  
-                </section>
-
-                <section id="organisers">
-                    <h2>Organizing Committee</h2>
-                    
-                    <div class="speaker-grid">
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">MD</div>
-                            <h4>.....</h4>
-                            <p>Committee Chair</p>
-                            <p>PhD, 2nd year</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">TB</div>
-                            <h4>......</h4>
-                            <p>Vice-Chair</p>
-                            <p>PhD, 3rd year</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">SM</div>
-                            <h4>.....</h4>
-                            <p>Communications</p>
-                            <p>Master's, 2nd year</p>
-                        </div>
-
-                        <div class="speaker-card">
-                            <div class="speaker-avatar">AC</div>
-                            <h4>A.....</h4>
-                            <p>Logistics</p>
-                            <p>PhD, 1st year</p>
-                        </div>
-                    </div>
-
-                    <p style="margin-top: 2rem;">
-                        <strong>Contact:</strong> semaine.doctorants@usherbrooke.ca
-                    </p>
-                </section>
-            </div>
-
-            <aside class="sidebar">
-                <h3>Key Information</h3>
-                
-                <div class="info-item">
-                    <strong>📅 Dates</strong>
-                    February 10-14, 2026
-                </div>
-
-                <div class="info-item">
-                    <strong>📍 Venue</strong>
-                    Université de Sherbrooke<br>
-                    Department of Mathematics
-                </div>
-
-                <div class="info-item">
-                    <strong>🌐 Format</strong>
-                    Hybrid (in-person + online)
-                </div>
-
-                <div class="info-item">
-                    <strong>👥 Participants</strong>
-                    Maximum 80 places
-                </div>
-
-                <div class="info-item">
-                    <strong>💰 Registration</strong>
-                    Free for UdeS students<br>
-                    $50 CAD other institutions
-                </div>
-
-                <div class="info-item">
-                    <strong>📧 Contact</strong>
-                    semaine.doctorants@usherbrooke.ca
-                </div>
-
-                <a href="#" class="btn-primary" style="width: 100%; text-align: center; display: block;">Register</a>
-
-                <h3 style="margin-top: 2rem;">Useful Links</h3>
-                <ul style="list-style: none; margin-left: 0;">
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Full Programme (PDF)</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Submit an Abstract</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Campus Map</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="#" style="color: #00703c; text-decoration: none;">→ Accommodation</a></li>
-                    <li style="margin-bottom: 0.8rem;"><a href="https://www.usherbrooke.ca/mathematiques/" style="color: #00703c; text-decoration: none;">→ Department of Mathematics</a></li>
-                </ul>
-
-                <h3 style="margin-top: 2rem;">Partners</h3>
-                
-            </aside>
-        </div>
-    </div>
-
-    
 
     <script>
         function switchLanguage(lang) {
@@ -816,20 +390,6 @@
             if (savedLang && savedLang !== 'fr') {
                 switchLanguage(savedLang);
             }
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
     </script>
 </body>
